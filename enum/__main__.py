@@ -1,0 +1,3 @@
+import study
+study.run()
+

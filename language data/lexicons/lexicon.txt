@@ -1,0 +1,48 @@
+# Artifical empty lexical items
+
+a			:: a
+b			:: b
+c			:: c
+d			:: d
+
+# Universal (functional) items
+T			:: T
+C			:: C IND
+C(wh)		:: C C(wh) !wCOMP:Aux wh +SPEC:wh 
+v			:: v !wCOMP:V
+D			:: D LF:the PF:0
+[topic]		:: LF:topic PF:0 sublexical !fCOMP:D TOPIC
+
+
+# English
+the			:: D LANG:EN
+dog			:: N LANG:EN
+bark		:: V V/INTR LANG:EN
+barks		:: V V/INTR LANG:EN
+leave		:: V V/INTR
+ing			:: N !wCOMP:V ε LANG:EN
+bite		:: V V/TR !COMP:D LANG:EN
+which		:: D wh LANG:EN
+man			:: N LANG:EN
+angry		:: A α:N λ:L LANG:EN
+frequently	:: Adv adjoin:V LANG:EN
+city		:: N LANG:EN
+from		:: P LANG:EN
+in			:: P α:V   LANG:EN
+ed			:: T !wCOMP:V LANG:EN
+did			:: T Aux LANG:EN
+does		:: T Aux LANG:EN
+was			:: T Aux +COMP:v* LANG:EN
+en			:: v* V +COMP:V/TR EPP LANG:EN !wCOMP:V/TR
+that		:: C LANG:EN
+believe		:: V !COMP:C LANG:EN
+seem		:: V +COMP:Inf RAISING LANG:EN
+seems		:: V +COMP:Inf RAISING LANG:EN
+to			:: Inf +SPEC:D,Ø LANG:EN
+
+# Finnish
+
+
+koira		:: N LF:dog PF:koira NOM LANG:FI
+puri		:: V V/TR LF:bit PF:pure- LANG:FI
+miestä		:: N LF:man PF:miestä PAR LANG:FI

@@ -1,0 +1,259 @@
+			
+# Study 1.
+
+# 1. Intransitive clauses
+
+	# 1.1. Standard intransitive clause
+
+		numeration=C; ed; the; dog; bark
+		
+			sentence = C the dog bark#ed
+			structure = [_CP C [_TP [_DP the dog]:1 [_TP (bark ed) [_VP __:1 _]]]]
+			thematic roles = agent of bark(the dog)
+
+	# 1.2. Robustness
+
+		# 1.2.1 Truncation
+		
+			# Removal of one word
+				
+				numeration=C; the; dog; bark
+				
+				numeration=C; ed; dog; bark
+				
+				numeration=C; ed; the; bark
+				
+				numeration=C; ed; the; dog
+			
+			# removal of the DP-argument
+			
+				numeration=C; ed
+	
+		# 1.2.2 Doubled constituents
+		
+			# Removal of one word
+		
+				numeration=C; C; ed; the; dog; bark
+
+				numeration=C; ed; ed; the; dog; bark
+				
+				numeration=C; ed; the; the; dog; bark
+				
+				numeration=C; ed; the; dog; dog; bark
+				
+				numeration=C; ed; the; dog; bark; bark
+			
+			# addition of the whole DP-argument
+			
+				numeration=C; ed; the; dog; bark; the; man
+
+	# 2. Transitive clauses
+	
+		# 2.1 Standard transitive clause
+		
+		numeration= C; ed; v; the; dog; bite; the; man
+
+			sentence = C the man bite#v#ed the dog
+			structure = [_CP C [_TP [_DP the man]:1 [_TP ((bite v) ed) [_vP __:1 [_vP _ [_VP _ [_DP the dog]]]]]]]
+			thematic roles = agent of bite#v(the man); patient of bite(the dog)
+			/
+			sentence = C the dog bite#v#ed the man
+			structure = [_CP C [_TP [_DP the dog]:1 [_TP ((bite v) ed) [_vP __:1 [_vP _ [_VP _ [_DP the man]]]]]]]
+			thematic roles = agent of bite#v(the dog); patient of bite(the man)
+		
+		# 2.2 Robustness
+		
+			# 2.2.1 Truncation
+			
+				numeration= C; v; the; dog; bite; the; man
+				
+				numeration= C; ed; the; dog; bite; the; man
+			
+				numeration= C; ed; v; dog; bite; the; man
+			
+				numeration= C; ed; v; the; bite; the; man
+			
+				numeration= C; ed; v; the; dog; bite; the
+			
+			# 2.2.2 Doubled constituents
+			
+				numeration= C; C; ed; v; the; dog; bite; the; man
+				
+				numeration= C; ed; ed; v; the; dog; bite; the; man
+				
+				numeration= C; ed; v; v; the; dog; bite; the; man
+				
+				numeration= C; ed; v; the; the; dog; bite; the; man
+				
+				numeration= C; ed; v; the; dog; dog; bite; the; man
+				
+				numeration= C; ed; v; the; dog; bite; bite; the; man
+				
+				numeration= C; ed; v; the; dog; bite; the; the; man
+				
+				numeration= C; ed; v; the; dog; bite; the; man; man
+				
+	# 3. Transitive personal passive
+	
+		# 3.1 Standard personal passive
+		
+			numeration=C; was; the; man; bite; en
+			
+				sentence = C the man was bite#en
+				structure = [_CP C [_TP [_DP the man]:1 [_TP was [_v*P __:1 [_v*P (bite en) [_VP _ __:1]]]]]]
+				thematic roles = patient of bite(the man)
+	
+		# 3.2 Robustness
+		
+			# 3.2.1 Truncation
+								
+				# Single word
+									
+					numeration=C; the; man; bite; en
+					
+					numeration=C; was; man; bite; en
+					
+					numeration=C; was; the; bite; en
+					
+					numeration=C; was; the; man; bite
+					
+				# DP-argument
+				
+					numeration=C; was; bite; en
+			
+			# 3.2.2 Dubplication
+			
+				# Single word
+				
+					numeration=C; C; was; the; man; bite; en
+					
+					numeration=C; was; was; the; man; bite; en
+					
+					numeration=C; was; the; the; man; bite; en
+					
+					numeration=C; was; the; man; man; bite; en
+					
+					numeration=C; was; the; man; bite; bite; en
+					
+					numeration=C; was; the; man; bite; en; en
+					
+				# DP-argument
+				
+					numeration=C; was; the; man; bite; en; the; dog
+		
+END
+		
+	# 4. PP-arguments
+	
+		# 4.1 Standard examples
+
+			# Without C
+
+				numeration=T;the;dog;barks;in;the;city
+				targets=the dog barks#T in the city; the city barks#T in the dog
+				targets=the dog in the city barks#T; the city in the dog barks#T
+				thematic roles=agent of barks(the dog); patient of in(the city)
+				thematic roles=agent of barks(the city); patient of in(the dog)
+				thematic roles=agent of barks(the dog in the city); agent of barks(the city in the dog)
+		
+			# With C
+			
+				numeration=C;T;the;dog;barks;in;the;city
+				targets=C the dog barks#T in the city; C the city barks#T in the dog
+				targets=C the dog in the city barks#T; C the city in the dog barks#T
+				targets=in the city C the dog barks#T; in the dog C the city barks#T
+				thematic roles=agent of barks(the dog); patient of in(the city)
+				thematic roles=agent of barks(the city); patient of in(the dog)
+				thematic roles=agent of barks(the dog in the city); agent of barks(the city in the dog)	
+		
+		# 4.2 Robustness
+		
+			# 4.2.1 truncation
+		
+				numeration=the;dog;barks;in;the;city
+				targets=the dog barks in the city; the city barks in the dog
+				targets=the dog in the city barks; the city in the dog barks
+				thematic roles=agent of barks(the dog); agent of barks(the city)
+				thematic roles=agent of barks(the dog in the city)
+				thematic roles=agent of barks(the city in the dog)
+				thematic roles=patient of in(the city); patient of in(the dog)
+				
+				numeration=T;dog;barks;in;the;city
+				
+				numeration=T;the;barks;in;the;city
+				
+				numeration=T;the;dog;in;the;city
+				
+				numeration=T;the;dog;barks;the;city
+				
+				numeration=T;the;dog;barks;in;city
+				
+				numeration=T;the;dog;barks;in;the
+
+			# 4.2.2 duplication
+			
+				numeration=T;T;the;dog;barks;in;the;city
+				
+				numeration=T;the;the;dog;barks;in;the;city
+				
+				numeration=T;the;dog;dog;barks;in;the;city
+				
+				numeration=T;the;dog;barks;barks;in;the;city
+				
+				numeration=T;the;dog;barks;in;in;the;city
+				
+				numeration=T;the;dog;barks;in;the;the;city
+				
+				numeration=T;the;dog;barks;in;the;city;city
+	
+	# 5. Successive-cyclic movement
+	
+		# 5.1 Standard raising construction
+							
+			numeration=T;the;dog;seems;to;bark
+			targets=the dog seems#T to bark
+			thematic roles=agent of bark(the dog)
+			
+			# 5.1.1 Truncation
+			
+				# Single words
+			
+					numeration=the;dog;seems;to;bark
+					targets=the dog seems to bark
+					thematic roles=agent of bark(the dog)
+					
+					numeration=T;dog;seems;to;bark
+					
+					numeration=T;the;seems;to;bark
+					
+					numeration=T;the;dog;to;bark
+					
+					numeration=T;the;dog;seems;to
+				
+				# DP-argument
+				
+					numerationn=T;seems;to
+				
+			# 5.1.2 Duplication
+			
+				# Single words
+			
+					numeration=T;T;the;dog;seems;to;bark
+
+					numeration=T;the;the;dog;seems;to;bark
+
+					numeration=T;the;dog;dog;seems;to;bark
+
+					numeration=T;the;dog;seems;seems;to;bark
+
+					numeration=T;the;dog;seems;to;to;bark
+
+					numeration=T;the;dog;seems;to;bark;bark
+				
+				# Extra DP-argument
+				
+					numeration=T;the;dog;seems;to;bark;the;man
+
+	# 6. Finnish topicalization
+	
+	
