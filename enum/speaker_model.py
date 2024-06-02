@@ -1,17 +1,15 @@
 from phrase_structure import PhraseStructure
-from support import print_lst, get_root, print_sWM, sWMcopy
-from data_management import SimulationData
-
-def set_(SO):
-    if isinstance(SO, PhraseStructure):
-        return {SO}
-    return set(SO)
-
+from support import get_root, sWMcopy, isocopy, format_sWM
 import itertools
 from lexicon import Lexicon
 from LF_interface import LFInterface
 from PF_spellout import PFspellout
 from narrow_semantics import NarrowSemantics
+
+def set_(SO):
+    if isinstance(SO, PhraseStructure):
+        return {SO}
+    return set(SO)
 
 class SpeakerModel:
 
@@ -49,20 +47,21 @@ class SpeakerModel:
                         self.derivational_search_function(sWM_ | set_(OP(*SO_)))
                 PhraseStructure.log_report += '.'
 
-    @staticmethod
-    def derivation_is_complete(sWM):
+    def derivation_is_complete(self, sWM):
         return len({X for X in sWM if X.sublexical()}) == 0 and len({X for X in sWM if X.isRoot()}) == 1
 
     def process_output(self, sWM):
         root_structure = get_root(sWM)
-        self.data.log(f'\nDerivation completed, ')
+        self.data.log(f'\nDerivation completed ')
 
         for X in sWM:
             if not self.LFInterface.legibility_conditions(X):
                 self.data.log('\n\n')
                 return
 
-        output_sentence = f'{self.PFspellout.spellout({x.copy() for x in sWM})[0:-1]}'
+        sWM_ = isocopy(sWM)
+
+        output_sentence = f'{self.PFspellout.spellout(sWM_)}'.strip()
 
         if not self.narrow_semantics.interpret(root_structure):
             self.data.log('semantic interpretation fails.\n')
@@ -70,7 +69,7 @@ class SpeakerModel:
 
         # Send results for external modules for evaluation
         root_structure.clean_chains()
-        self.data.log(f'output accepted.\n')
+        self.data.log(f'and output accepted.\n')
         self.output.append({'sentence': output_sentence,
-                                    'structure': f'{root_structure}',
+                                    'structure': f'{format_sWM(sWM)}',
                                     'thematic roles': self.narrow_semantics.semantic_interpretation["thematic roles"]})

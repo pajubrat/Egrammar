@@ -1,5 +1,6 @@
 from phrase_structure import PhraseStructure
-from support import print_sWM
+from support import format_sWM
+import difflib
 
 
 def print_solution(solution):
@@ -135,7 +136,7 @@ class DataManagement:
         self.n_steps += 1
         self.log_file.write(f'\n{self.n_steps}.\n')
         self.log_file.write(f'{PhraseStructure.log_report}')
-        self.log_file.write(f'={print_sWM(new_sWM)}\n')
+        self.log_file.write(f'={format_sWM(new_sWM)}\n')
         PhraseStructure.log_report = ''
 
     def prepare_experiment(self, numeration):
@@ -145,7 +146,7 @@ class DataManagement:
     def evaluate_experiment(self, data):
         data.output.prune_duplicates()
         data.output.format_into_strings()   # To compare with input data which is in this format
-        self.print_and_log(f'\nRESULTS\n{data.output}\n-------------------------------------------------------------------------------------\nERRORS:\n')
+        self.print_and_log(f'\nRESULTS:\n{data.output}\n-------------------------------------------------------------------------------------\nERRORS:\n')
         n_errors = 0
         for dataset in [(data.input, data.output, 'target not in the output'), (data.output, data.input, 'output not in targets')]:
             for numeration in dataset[0]:

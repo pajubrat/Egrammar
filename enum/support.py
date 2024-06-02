@@ -6,6 +6,13 @@ def fformat(f):
         return f.split(':')[0], set(f.split(':')[1].split(','))
     return None, None
 
+def isocopy(sWM):
+    new_roots = {x.copy() for x in sWM if not x.adjunct()}
+    new_adjuncts = {(x, x.copy()) for x in sWM if x.adjunct()}
+    for s, c in new_adjuncts:
+        c.mother_ = s.mother_.iso
+    return new_roots | {x[1] for x in new_adjuncts}
+
 def sWMcopy(sWM, SO):
     def get_mirror(x, M):
         return next((m[1] for m in M if x == m[0]), None)
@@ -16,7 +23,7 @@ def sWMcopy(sWM, SO):
         if m[0].adjunct():
             m[1].mother_ = get_mirror(m[0].mother(), M)
     SO_ = [get_mirror(x, M) for x in SO]  # Selected objects in the new sWM
-    sWM_ = [x[1] for x in M if x[1] not in SO_]
+    sWM_ = [m[1] for m in M if m[1] not in SO_]
     return set(sWM_), tuple(SO_)
 
 def print_lst(lst):
@@ -33,12 +40,12 @@ def print_lst(lst):
             str += ', '
     return str
 
-def print_sWM(sWM):
+def format_sWM(sWM):
     aWM = [f'{x}' for x in sWM if not x.adjunct()]
     iWM = [f'{x.mother().head().lexical_category()}P|{x}' for x in sWM if x.adjunct()]
     s = f'{", ".join(aWM)}'
     if iWM:
-        s += f'{{ {", ".join(iWM)} }}'
+        s += f' {{ {", ".join(iWM)} }}'
     return s
 
 def print_dictionary(sem):

@@ -17,6 +17,7 @@ class PhraseStructure:
         self.elliptic = False
         self.chain_index = 0
         self.chaincopied_ = False
+        self.iso = None   #   bookkeeping only
 
     def copy(X):
         if not X.terminal():
@@ -33,6 +34,7 @@ class PhraseStructure:
         Y.elliptic = X.elliptic
         Y.chain_index = X.chain_index
         Y.zero = X.zero
+        Y.iso = X
 
     def chaincopy(X):
         Y = X.copy()
@@ -122,6 +124,7 @@ class PhraseStructure:
 
     def Adjoin(X, Y):
         X.set_mother(Y)
+        PhraseStructure.log_report += f'Adjoin({X}) to {Y})\n'
         return X, Y
 
     def AdjoinPreconditions(X, Y):
@@ -163,7 +166,7 @@ class PhraseStructure:
         elif X.left().EPP() and X.right().phrasal():
             goal = X.right().target_for_A_movement()
         if goal:
-            PhraseStructure.log_report += f'\nPhrasal chain by {X.left()} targeting {goal}\n'
+            PhraseStructure.log_report += f'Phrasal chain by {X.left()} targeting {goal}\n'
             return goal.baptize_chain().chaincopy().Merge(X)
         return X
 
@@ -305,4 +308,3 @@ class PhraseStructure:
 
     def lexical_category(X):
         return next((f for f in ['N', 'v', 'v*', 'Adv', 'Inf', 'V', 'C', 'D', 'A', 'P', 'T', 'a', 'b', 'c'] if f in X.features), '?')
-
