@@ -139,9 +139,9 @@ class DataManagement:
         self.log_file.write(f'={format_sWM(new_sWM)}\n')
         PhraseStructure.log_report = ''
 
-    def prepare_experiment(self, numeration):
+    def prepare_experiment(self, numeration, language):
         self.output.add_new_numeration(numeration)
-        self.log('\n---------------------------------------------------\n')
+        self.log(f'\n-------------------------({language})-------------------------------\n')
 
     def evaluate_experiment(self, data):
         data.output.prune_duplicates()

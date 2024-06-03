@@ -27,7 +27,7 @@ class Lexicon:
 
     @classmethod
     def guess_language(cls, numeration):
-        for word in numeration:
+        for word in [word.strip() for word in numeration.split(';')]:
             if word in cls.root_lexicon.keys() and determine_language(cls.root_lexicon[word]):
                 return determine_language(cls.root_lexicon[word])[0]
         return 'LANG:EN'    #   Default language

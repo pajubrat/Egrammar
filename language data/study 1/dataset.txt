@@ -1,4 +1,4 @@
-		
+
 			
 # 1. Intransitive clauses
 
@@ -270,4 +270,23 @@
 				
 				numeration=was; the; man; the; man; bite; en; frequently
 								
-END
+# 5. Finnish topic mechanism
+
+	numeration= D; koira; pure; v; i; D; miestä; [topic]
+	    
+		sentence = miestä#D pure#v#i D koira
+        structure = [_TP [_DP (miestä D) _]:1 [_TP ((pure v) i) [_vP __:1 [_vP _ [_VP _ [_DP D koira]]]]]]
+        thematic roles = agent of pure#v(miestä D miestä); patient of pure(D koira)
+		/
+        sentence = miestä#D pure#v#i D koira
+        structure = [_TP [_DP (miestä D) _]:1 [_TP ((pure v) i) [_vP [_DP D koira] [_vP _ [_VP _ __:1]]]]]
+        thematic roles = agent of pure#v(D koira); patient of pure(miestä D miestä)
+		/
+        sentence = koira#D pure#v#i D miestä
+        structure = [_TP [_DP (koira D) _]:1 [_TP ((pure v) i) [_vP __:1 [_vP _ [_VP _ [_DP D miestä]]]]]]
+        thematic roles = agent of pure#v(koira D koira); patient of pure(D miestä)
+		/	
+        sentence = koira#D pure#v#i D miestä
+        structure = [_TP [_DP (koira D) _]:1 [_TP ((pure v) i) [_vP [_DP D miestä] [_vP _ [_VP _ __:1]]]]]
+        thematic roles = agent of pure#v(D miestä); patient of pure(koira D koira)
+		

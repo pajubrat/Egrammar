@@ -100,7 +100,7 @@ class PhraseStructure:
         return PhraseStructure(X, Y)
 
     def MergePreconditions(X, Y):
-        return not Y.bound_morpheme() and \
+        return not X.sublexical() and not Y.bound_morpheme() and \
                not X.selection_violation(Y) and X.sandwich_condition(Y)
 
     def sandwich_condition(X, Y):
@@ -120,7 +120,7 @@ class PhraseStructure:
 
     def MergeComposite(X, Y):
         PhraseStructure.log_report += f'Merge({X}, {Y})\n'
-        return X.HeadMovement(Y).Merge(Y).phrasal_movement()
+        return X.HeadMovement(Y).Merge(Y).phrasal_movement_()
 
     def Adjoin(X, Y):
         X.set_mother(Y)
@@ -159,16 +159,13 @@ class PhraseStructure:
         Z.features = Y.features - {f for f in Y.features if f.startswith('!wCOMP:')}
         return Z
 
-    def phrasal_movement(X):
-        goal = None
-        if X.left().operator():
-            goal = X.right().minimal_search('wh')
-        elif X.left().EPP() and X.right().phrasal():
-            goal = X.right().target_for_A_movement()
-        if goal:
-            PhraseStructure.log_report += f'Phrasal chain by {X.left()} targeting {goal}\n'
-            return goal.baptize_chain().chaincopy().Merge(X)
+    def phrasal_movement_(X):
+        if X.head().EPP() and X.head().complement() and X.head().Agree(X.head().EPP()):
+            return X.head().Agree(X.head().EPP()).baptize_chain().chaincopy().Merge(X)
         return X
+
+    def Agree(X, goal_features):
+        return X.complement().minimal_search(goal_features)
 
     def FeatureMergePreconditions(X, Y):
         return X.sublexical() and Y.terminal() and X.wcomplement_features() <= Y.features
@@ -176,6 +173,7 @@ class PhraseStructure:
     def FeatureMerge(X, Y):
         Y.features = Y.features | X.features
         Y.features.discard('sublexical')
+        PhraseStructure.log_report += f'Features {X.features} were inserted into {Y}° by Feature Merge\n'
         return Y
 
     def sublexical(X):
@@ -191,18 +189,18 @@ class PhraseStructure:
         return 'θ' in X.head().features
 
     def EPP(X):
-        return 'EPP' in X.features
+        return next((set(f.split(':')[1].split(',')) for f in X.features if f.startswith('EPP')), None)
 
     def target_for_A_movement(X):
         return next((x for x in [X.left(), X.right()] if x.phrasal() and x.referential()), None)
 
-    def minimal_search(X, feature):
+    def minimal_search(X, features):
         while X:
             if X.zero_level():
                 X = X.complement()
             else:
                 for x in X.const:
-                    if feature in x.head().features:
+                    if features <= x.head().features:
                         return x
                     if x.head() == X.head():
                         X = x

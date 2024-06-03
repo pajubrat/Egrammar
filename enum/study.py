@@ -14,7 +14,7 @@ def run():
     print('calculating', end='', flush=True)
     for numeration in data.input.get_data().keys():
         language = Lexicon.guess_language(numeration)
-        data.prepare_experiment(numeration)
+        data.prepare_experiment(numeration, language)
         output_data = speaker_model[language].derive(numeration)
         data.output.add_data(numeration, output_data)
     data.evaluate_experiment(data)

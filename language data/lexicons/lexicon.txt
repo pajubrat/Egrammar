@@ -11,7 +11,7 @@ C			:: C IND
 C(wh)		:: C C(wh) !wCOMP:Aux wh +SPEC:wh 
 v			:: v !wCOMP:V
 D			:: D LF:the PF:0
-[topic]		:: LF:topic PF:0 sublexical !fCOMP:D TOPIC
+[topic]		:: LF:topic PF:0 sublexical !wCOMP:D TOPIC
 
 
 # English
@@ -33,7 +33,7 @@ ed			:: T !wCOMP:V LANG:EN
 did			:: T Aux LANG:EN
 does		:: T Aux LANG:EN
 was			:: T Aux +COMP:v* LANG:EN
-en			:: v* V +COMP:V/TR EPP LANG:EN !wCOMP:V/TR
+en			:: v* V +COMP:V/TR EPP:D LANG:EN !wCOMP:V/TR
 that		:: C LANG:EN
 believe		:: V !COMP:C LANG:EN
 seem		:: V +COMP:Inf RAISING LANG:EN
@@ -42,7 +42,7 @@ to			:: Inf +SPEC:D,Ø LANG:EN
 
 # Finnish
 
-
 koira		:: N LF:dog PF:koira NOM LANG:FI
-puri		:: V V/TR LF:bit PF:pure- LANG:FI
+pure		:: V V/TR LF:bit PF:pure- LANG:FI
 miestä		:: N LF:man PF:miestä PAR LANG:FI
+i			:: T LF:pst PF:i !wCOMP:V LANG:FI

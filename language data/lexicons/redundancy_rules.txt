@@ -1,7 +1,7 @@
 D			::	+COMP:N +SPEC:Ø
 V/TR		::	+COMP:D +SPEC:X θ
 V/INTR		::	+SPEC:Ø,D +COMP:Ø,X θ
-T			::	+COMP:V +SPEC:D EPP
+T			::	+COMP:V +SPEC:D
 v			::	+COMP:V +SPEC:D !wCOMP:V V θ
 v*			::	+COMP:V V θ
 C			::	+COMP:T +SPEC:WH,Ø
@@ -10,11 +10,11 @@ Inf  		::	+COMP:V +SPEC:D
 N 			::	+COMP:Ø +SPEC:Ø θ
 
 # Language-specific rules
-#T LANG:EN		::	EPP:D
-#v* LANG:EN		::	EPP:D
-#RAISING LANG:EN	::	EPP:D
-#T/inf			::	EPP:D
-#T LANG:FI		::	EPP:TOPIC
+T LANG:EN			::	EPP:D
+v* LANG:EN			::	EPP:D
+RAISING LANG:EN		::	EPP:D
+T/inf				::	EPP:D
+T LANG:FI			::	EPP:TOPIC
 				
 				
 				
