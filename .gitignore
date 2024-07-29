@@ -14,3 +14,9 @@ cmder_mini
 bin
 PCBPlugin5
 *log*
+enum/__pycache__/data_management.cpython-38.pyc
+enum/__pycache__/data_management.cpython-38.pyc
+enum/__pycache__/lexicon.cpython-38.pyc
+/enum/__pycache__
+*.pyc
+enum/.idea/.name

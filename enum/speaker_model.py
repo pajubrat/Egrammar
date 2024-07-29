@@ -12,7 +12,8 @@ def set_(SO):
     return set(SO)
 
 class SpeakerModel:
-
+    """Each speaker model is an empirical model (cognitive architecture) for
+    the speaker of some language or dialect"""
     def __init__(self, data, language, settings):
         self.language = language
         self.lexicon = Lexicon(settings, language)
@@ -21,10 +22,14 @@ class SpeakerModel:
         self.narrow_semantics = NarrowSemantics()
         self.data = data
         self.output = []
-        self.syntactic_operations = [(PhraseStructure.MergePreconditions, PhraseStructure.MergeComposite, 2, 'Merge'),
-                                     (PhraseStructure.HeadMergePreconditions, PhraseStructure.HeadMerge, 2, 'Head Merge'),
-                                     (PhraseStructure.AdjoinPreconditions, PhraseStructure.Adjoin, 2, 'Adjoin'),
-                                     (PhraseStructure.FeatureMergePreconditions, PhraseStructure.FeatureMerge, 2, 'fMerge')
+        self.syntactic_operations = [(PhraseStructure.MergePreconditions,
+                                      PhraseStructure.MergeComposite, 2, 'Merge'),
+                                     (PhraseStructure.HeadMergePreconditions,
+                                      PhraseStructure.HeadMerge, 2, 'Head Merge'),
+                                     (PhraseStructure.AdjoinPreconditions,
+                                      PhraseStructure.Adjoin, 2, 'Adjoin'),
+                                     (PhraseStructure.FeatureMergePreconditions,
+                                      PhraseStructure.FeatureMerge, 2, 'fMerge')
                                      ]
 
     def derive(self, numeration_str):
@@ -51,7 +56,9 @@ class SpeakerModel:
         return len({X for X in sWM if X.sublexical()}) == 0 and len({X for X in sWM if X.isRoot()}) == 1
 
     def process_output(self, sWM):
-        root_structure = get_root(sWM)
+        """Branches the derivation to LF-interface and PF-interface and
+        performs LF-legibility tests"""
+
         self.data.log(f'\nDerivation completed ')
 
         for X in sWM:
@@ -59,10 +66,11 @@ class SpeakerModel:
                 self.data.log('\n\n')
                 return
 
-        sWM_ = isocopy(sWM)
+        sWM_ = isocopy(sWM)     #   Take copy for backtracking purposes
 
         output_sentence = f'{self.PFspellout.spellout(sWM_)}'.strip()
 
+        root_structure = get_root(sWM)
         if not self.narrow_semantics.interpret(root_structure):
             self.data.log('semantic interpretation fails.\n')
             return
